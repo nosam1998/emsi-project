@@ -17,7 +17,7 @@ class Overview extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <InputGroup className="mb-3 pt-3">
+                    <InputGroup className="mb-3 py-3">
                         <Form.Control placeholder="Please enter a URL for the API" type="text" value={this.props.apiUrl}
                                       onChange={e => this.props.stateHandler("apiUrl", e.target.value)}/>
                         <InputGroup.Append>
