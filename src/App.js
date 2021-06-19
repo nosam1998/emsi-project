@@ -53,13 +53,12 @@ class App extends Component {
                 <div className="row px-5">
                     <Overview stateHandler={this.stateHandler} apiUrl={this.state.apiUrl}
                               getUrlResponseData={this.getUrlResponseData}/>
-
                 </div>
 
                 <div className="row">
                     {this.state.apiData !== null
                     ? <Summary apiData={this.state.apiData}/>
-                    : "Not Yet" }
+                    : "" }
                 </div>
             </>
         )

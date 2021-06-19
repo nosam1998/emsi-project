@@ -25,20 +25,6 @@ class Overview extends Component {
                         </InputGroup.Append>
                     </InputGroup>
                 </div>
-
-                <div className="row">
-                    <div className="col-4">
-
-                    </div>
-
-                    <div className="col-4">
-
-                    </div>
-
-                    <div className="col-4">
-
-                    </div>
-                </div>
             </div>
         );
     }
