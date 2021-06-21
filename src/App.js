@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Overview from "./components/Overview";
 import GraphView from "./components/GraphView";
 import Summary from "./components/Summary";
+// import FileHandler from "./components/FileHandler";
+import FileDragDropHandler from "./components/FileDragDropHandler";
 
 class App extends Component {
     constructor(props) {
@@ -58,6 +60,8 @@ class App extends Component {
                     <div className="row px-5">
                         <Overview stateHandler={this.stateHandler} apiUrl={this.state.apiUrl}
                                   getUrlResponseData={this.getUrlResponseData}/>
+                        {/*<FileHandler stateHandler={this.stateHandler} />*/}
+                        <FileDragDropHandler stateHandler={this.stateHandler} />
                     </div>
 
                     {this.state.apiData !== null &&
