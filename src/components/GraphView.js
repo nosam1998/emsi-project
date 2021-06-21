@@ -17,12 +17,26 @@ class GraphView extends Component {
         return range;
     }
 
+    convertToPercentages(arr) {
+        let first = arr[0];
+        let percentagesArr = [0];
+        let tempNum;
+
+        for (let i = 1; i < arr.length; i++) {
+            tempNum = ((arr[i] / first) * 100) - 100
+            percentagesArr.push(tempNum)
+        }
+
+        return percentagesArr;
+    }
+
     buildDict(arr, start, end) {
         let d = [];
         let range = this.generateRange(this.props.graphData.start_year, this.props.graphData.end_year);
+        let percentageArr = this.convertToPercentages(arr);
 
         for (let i = 0; i < arr.length; i++) {
-            d.push({x: range[i], y: arr[i]});
+            d.push({x: range[i], vals: { originalNum: arr[i], percentage: percentageArr[i] }});
         }
 
         return d
@@ -36,55 +50,50 @@ class GraphView extends Component {
             datasets: [{
                 borderColor: '#0539a2',
                 label: "Nation",
-                data: data.nation
+                data: this.convertToPercentages(data.nation)
             }, {
                 borderColor: '#3855dd',
                 label: "Regional",
-                data: data.regional
+                data: this.convertToPercentages(data.regional)
             }, {
                 borderColor: '#789ecd',
                 label: "State",
-                data: data.state
+                data: this.convertToPercentages(data.state)
             }],
             plugins: {
                 tooltip: {
                     // Disable the on-canvas tooltip
                     enabled: true
                 }
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Percent Change'
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Percent Change'
+                        }
+                    }]
+                }
             }
+
         };
+        console.log([data.nation, data.regional, data.state])
         console.log(newDataFormatted)
         return newDataFormatted;
     }
-
-    // formatGraph(trendComparisonJson) {
-    //     let graphData = [];
-    //     let tempGraphData = {};
-    //
-    //     return graphData;
-    // }
 
     render() {
         return (
             <Line data={this.formatData()} type="line"/>
         );
     }
-
-    // render() {
-    //     return (
-    //         <div className="row">
-    //             <XYPlot height={300} width= {300}>
-    //                 {this.formatGraph(this.props.parsedApiData.trend_comparison).map(line => {
-    //                     <LineSeries data={line} />
-    //                 })}
-    //                 <VerticalGridLines />
-    //                 <HorizontalGridLines />
-    //                 <XAxis />
-    //                 <YAxis />
-    //             </XYPlot>
-    //         </div>
-    //     );
-    // }
 }
 
 export default GraphView;
