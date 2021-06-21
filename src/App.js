@@ -60,7 +60,6 @@ class App extends Component {
                     <div className="row px-5">
                         <Overview stateHandler={this.stateHandler} apiUrl={this.state.apiUrl}
                                   getUrlResponseData={this.getUrlResponseData}/>
-                        {/*<FileHandler stateHandler={this.stateHandler} />*/}
                         <FileDragDropHandler stateHandler={this.stateHandler} />
                     </div>
 
