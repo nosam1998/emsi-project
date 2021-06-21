@@ -22,18 +22,16 @@ class FileDragDropHandler extends Component {
 
     handleDrop = async (e) => {
         e.preventDefault();
-        const reader = new FileReader();
-        reader.onload = async (e) => {
-            const text = (e.target.result);
-            console.log(text);
-            this.props.stateHandler("apiData", JSON.parse(text));
-        };
-
         try {
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const text = (e.target.result);
+                // console.log(text);
+                this.props.stateHandler("apiData", JSON.parse(text));
+            };
+
             reader.readAsText(e.dataTransfer.files[0]);
-        } catch (e) {
-            console.log(e)
-        }
+        } catch (err) {}
 
         e.stopPropagation();
         e.dataTransfer.clearData();
