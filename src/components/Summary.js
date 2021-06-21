@@ -29,17 +29,16 @@ class Summary extends Component {
     }
 
     render() {
-        let {
-            jobsColor,
-            jobsWord
-        } = this.colorCode(this.props.apiData.summary.jobs.regional, this.props.apiData.summary.jobs.national_avg);
+        let jobsColorAndWord = this.colorCode(this.props.apiData.summary.jobs.regional, this.props.apiData.summary.jobs.national_avg);
+        let jobsColor = jobsColorAndWord[0];
+        let jobsWord = jobsColorAndWord[1];
 
         return (
             <>
                 <div className="col-4">
                     <div className="text-center">
                         <h2>{this.props.apiData.summary.jobs.regional}</h2>
-                        <h6>Jobs ({this.props.apiData.summary.jobs.year}</h6>
+                        <h6>Jobs ({this.props.apiData.summary.jobs.year})</h6>
                         <h6>{this.floatToPercentage(this.props.apiData.summary.jobs.regional / this.props.apiData.summary.jobs.national_avg)}
                             <span style={{color: jobsColor}}> {jobsWord} </span> National average</h6>
                     </div>

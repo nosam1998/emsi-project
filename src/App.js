@@ -29,36 +29,48 @@ class App extends Component {
             this.setState({apiData: response.data});
         });
     }
+    //
+    // formatGraph(trendComparisonJson) {
+    //     let graphData = [];
+    //     let tempGraphData = {};
+    //
+    //     return graphData;
+    // }
 
-    formatGraph(trendComparisonJson) {
-        let graphData = [];
-        let tempGraphData = {};
-
-        return graphData;
-    }
-
-    generateGraph() {
-        if (this.state.apiData.length > 0) {
-            let parsedApiData = JSON.parse(this.state.apiData);
-            return <GraphView parsedApiData={parsedApiData.trend_comparison}/>;
-        } else {
-            return ""
-        }
-    }
+    // generateGraph() {
+    //     let result = "";
+    //     if (this.state.apiData) {
+    //         result = <GraphView graphData={this.state.apiData}>
+    //     }
+    //
+    // }
 
 
     render() {
+        // let result = "";
+        // if (this.state.apiData) {
+        //     result = <GraphView graphData={this.state.apiData}>
+        // }
+
         return (
             <>
-                <div className="row px-5">
-                    <Overview stateHandler={this.stateHandler} apiUrl={this.state.apiUrl}
-                              getUrlResponseData={this.getUrlResponseData}/>
-                </div>
+                <div className="container">
+                    <div className="row px-5">
+                        <Overview stateHandler={this.stateHandler} apiUrl={this.state.apiUrl}
+                                  getUrlResponseData={this.getUrlResponseData}/>
+                    </div>
 
-                <div className="row">
-                    {this.state.apiData !== null
-                    ? <Summary apiData={this.state.apiData}/>
-                    : "" }
+                    {this.state.apiData !== null &&
+                        <div className="row">
+                            <Summary apiData={this.state.apiData}/>
+                        </div>
+                    }
+
+                    {this.state.apiData !== null &&
+                        <div className="row">
+                            <GraphView graphData={this.state.apiData.trend_comparison} />
+                        </div>
+                    }
                 </div>
             </>
         )
