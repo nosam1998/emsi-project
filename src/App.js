@@ -7,6 +7,7 @@ import GraphView from "./components/GraphView";
 import Summary from "./components/Summary";
 // import FileHandler from "./components/FileHandler";
 import FileDragDropHandler from "./components/FileDragDropHandler";
+import GraphFooter from "./components/GraphFooter";
 
 class App extends Component {
     constructor(props) {
@@ -74,6 +75,8 @@ class App extends Component {
                             <GraphView graphData={this.state.apiData.trend_comparison} />
                         </div>
                     }
+
+
                 </div>
             </>
         )

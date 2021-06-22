@@ -1,10 +1,12 @@
 import {Component} from "react";
 // import {HorizontalGridLines, LineSeries, VerticalGridLines, XAxis, XYPlot, YAxis} from "react-vis";
-import { Line } from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2';
+import GraphFooter from "./GraphFooter";
 
 class GraphView extends Component {
     constructor(props) {
         super(props);
+        this.formatGraphData = this.formatGraphData.bind(this);
     }
 
     generateRange(start, end) {
@@ -30,23 +32,34 @@ class GraphView extends Component {
         return percentagesArr;
     }
 
-    buildDict(arr, start, end) {
-        let d = [];
-        let range = this.generateRange(this.props.graphData.start_year, this.props.graphData.end_year);
-        let percentageArr = this.convertToPercentages(arr);
+    formatTableData() {
+        let data = this.props.graphData;
+        let newDataFormatted = {
+            start_year: data.start_year,
+            end_year: data.end_year,
+            yearsArr: this.generateRange(data.start_year, data.end_year),
+            regional: {
+                numbers: data.regional,
+                percentages: this.convertToPercentages(data.regional)
+            },
+            state: {
+                numbers: data.state,
+                percentages: this.convertToPercentages(data.state)
+            },
+            nation: {
+                numbers: data.nation,
+                percentages: this.convertToPercentages(data.nation)
+            }
+        };
 
-        for (let i = 0; i < arr.length; i++) {
-            d.push({x: range[i], vals: { originalNum: arr[i], percentage: percentageArr[i] }});
-        }
-
-        return d
+        // console.log(newDataFormatted)
+        return newDataFormatted;
     }
 
-    formatData() {
+    formatGraphData() {
         let data = this.props.graphData;
         let newDataFormatted = {
             labels: this.generateRange(this.props.graphData.start_year, this.props.graphData.end_year),
-            // datasets: [{ data: this.buildDict(data.nation) }, { data: this.buildDict(data.regional) }, { data: this.buildDict(data.state) }]
             datasets: [{
                 borderColor: '#0539a2',
                 label: "Nation",
@@ -84,14 +97,17 @@ class GraphView extends Component {
             }
 
         };
-        console.log([data.nation, data.regional, data.state])
-        console.log(newDataFormatted)
+
+        // console.log(newDataFormatted)
         return newDataFormatted;
     }
 
     render() {
         return (
-            <Line data={this.formatData()} type="line"/>
+            <>
+                <Line data={this.formatGraphData()} type="line"/>
+                <GraphFooter tableData={this.formatTableData()}/>
+            </>
         );
     }
 }
