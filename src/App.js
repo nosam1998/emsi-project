@@ -7,7 +7,7 @@ import GraphView from "./components/GraphView";
 import Summary from "./components/Summary";
 // import FileHandler from "./components/FileHandler";
 import FileDragDropHandler from "./components/FileDragDropHandler";
-import GraphFooter from "./components/GraphFooter";
+import HorizontalBarChart from "./components/HorizontalBarChart";
 
 class App extends Component {
     constructor(props) {
@@ -32,51 +32,34 @@ class App extends Component {
             this.setState({apiData: response.data});
         });
     }
-    //
-    // formatGraph(trendComparisonJson) {
-    //     let graphData = [];
-    //     let tempGraphData = {};
-    //
-    //     return graphData;
-    // }
-
-    // generateGraph() {
-    //     let result = "";
-    //     if (this.state.apiData) {
-    //         result = <GraphView graphData={this.state.apiData}>
-    //     }
-    //
-    // }
-
 
     render() {
-        // let result = "";
-        // if (this.state.apiData) {
-        //     result = <GraphView graphData={this.state.apiData}>
-        // }
-
         return (
             <>
                 <div className="container">
                     <div className="row px-5">
                         <Overview stateHandler={this.stateHandler} apiUrl={this.state.apiUrl}
                                   getUrlResponseData={this.getUrlResponseData}/>
-                        <FileDragDropHandler stateHandler={this.stateHandler} />
+                        <FileDragDropHandler stateHandler={this.stateHandler}/>
                     </div>
 
                     {this.state.apiData !== null &&
-                        <div className="row">
-                            <Summary apiData={this.state.apiData}/>
-                        </div>
+                    <div className="row">
+                        <Summary apiData={this.state.apiData}/>
+                    </div>
                     }
 
                     {this.state.apiData !== null &&
-                        <div className="row">
-                            <GraphView graphData={this.state.apiData.trend_comparison} />
-                        </div>
+                    <div className="row">
+                        <GraphView graphData={this.state.apiData.trend_comparison}/>
+                    </div>
                     }
 
-
+                    {this.state.apiData !== null &&
+                    <div className="row">
+                        <HorizontalBarChart barChartData={this.state.apiData.employing_industries}/>
+                    </div>
+                    }
                 </div>
             </>
         )
