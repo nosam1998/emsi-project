@@ -65,11 +65,11 @@ class GraphView extends Component {
                 label: "Nation",
                 data: this.convertToPercentages(data.nation)
             }, {
-                borderColor: '#3855dd',
+                borderColor: '#38ddcf',
                 label: "Regional",
                 data: this.convertToPercentages(data.regional)
             }, {
-                borderColor: '#789ecd',
+                borderColor: '#cd3636',
                 label: "State",
                 data: this.convertToPercentages(data.state)
             }],
