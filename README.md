@@ -2,6 +2,21 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## How to run
+Run `yarn start` in the command line. After the application has launched then you have two choices for importing
+the data
+1. You can enter the URL to an API where the JSON data is (If the URL is invalid you won't be able to click the Submit button). 
+   example URL: `https://run.mocky.io/v3/a2cc3707-8691-4188-8413-6183a7bb3d32`
+2. You can drag and drop a JSON file with the appropriate data onto the blue box, and the app will do the same
+   action as if it was pulled from the API. Feel free to use the JSON file called `ProjectSampleResponse.json`
+
+## What the app looks like
+### Before the Data is Imported:
+![Image of the app before data](before-data.PNG)
+
+### After the Data is Imported:
+![Image of the app after the data](with-data.PNG)
+
 ## Available Scripts
 
 In the project directory, you can run:
